@@ -1,0 +1,42 @@
+create table employee3
+(
+id number(10) primary key,
+name varchar2(30) not null,
+salary number(10) check(salary>0),
+age number(10) check(age>22),
+dept varchar2(30) default 'trainee'
+ )
+desc employee3;
+
+
+insert into employee3(id,name,salary,age) values (3 , 'manish', 60000 , 27)
+
+
+select * from employee2
+desc employee2
+
+select * from employee3
+
+create table employee4
+(
+id int primary key,
+name varchar2(30) not null,
+email varchar2(30) unique , 
+salary number(30) check(salary>0)
+);
+
+desc employee4
+
+alter table employee4 add (number varchar2(30));
+
+create table employee5
+(
+id number(10),
+name varchar2(10),
+salary number(10),
+constraint pk1 primary key(id)
+);
+insert into employee5 values(1 , 'sachin',50000);
+
+
+

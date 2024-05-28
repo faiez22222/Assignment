@@ -1,0 +1,68 @@
+CREATE TABLE employee
+(
+id number(10),
+name varchar2(10),
+salary number(10,2),
+age number(10)
+);
+
+INSERT INTO  employee (id, name, salary, age) VALUES (1, 'John Doe', 50000, 30)
+INSERT INTO employee (id, name, salary, age) VALUES (2, 'Jane Smith', 60000, 25);
+INSERT INTO employee (id, name, salary, age) VALUES (3, 'Alice Joh', 55000, 28);
+INSERT INTO employee (id, name, salary, age) VALUES (4, 'Bob Brown', 70000, 35);
+
+DESCRIBE employee; 
+select * from employee;
+
+insert into employee (id , name) values (5 , 'faiez');
+update employee set salary=60000 where id=3; 
+
+rename employee to emp3
+rename emp3 to employee
+
+alter table employee add (dept varchar2(30));
+alter table employee drop column dept
+
+select id,name, salary,salary+100 as bonus,salary/30 as salaryperday from employee
+
+alter table employee add (dept varchar2(30));
+update employee set dept='developer' where id=3
+
+insert into employee values(11 , 'samarqg' ,9860000 , 46 ,'developer') 
+select * from employee where dept!='hr';
+select * from employee order by age
+
+
+select * from employee order by age desc
+
+select * from employee where dept='hr' 
+order by age desc  
+select sum(salary) from employee
+select min(salary) from employee
+select name,count(id),sum(salary),min(salary),max(salary) from employee group by name
+
+
+select dept,count(id),sum(salary),min(salary),max(salary) 
+from employee 
+group by dept 
+having min(salary)>50000
+order by min(salary) desc
+
+select dept,count(id),sum(salary)
+from employee 
+where dept<>'tester'
+group by dept 
+having min(salary)>50000
+order by min(salary) desc
+
+select dept ,sum(salary) from employee group by dept having sum(salary)>100000
+
+select * from employee where dept!='developer' order by 'salary'
+
+
+
+
+
+
+
+

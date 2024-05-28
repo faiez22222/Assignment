@@ -1,0 +1,54 @@
+Assignment 1: Write a SELECT query to retrieve all columns from a 'customers' table, and modify it to return only the customer name and email address for customers in a specific city.
+
+		    select * from customers
+		    select name , email from (select * from customers where address='lucknow')
+    
+    
+******************************************************************************************************************************************
+
+Assignment 2 : Craft a query using an INNER JOIN to combine 'orders' and 'customers' tables for customers in a specified region, and a LEFT JOIN to display all customers including those without orders.
+
+   //innerjoin
+		select o.order_id,o.total_amount,c.customer_id,c.name,c.email,c.phone,c.address
+		from orders o
+		inner join 
+		customers c on o.customer_id=c.customer_id
+		where c.address='lucknow'  
+
+
+  //left join
+		select o.order_id,o.total_amount,c.customer_id,c.name,c.email,c.phone,c.address
+		from orders o
+		left join 
+		customers c on o.customer_id=c.customer_id
+		where c.address='lucknow'  
+
+************************************************************************************************************************************
+
+Assignment 3: Design a database schema for a library system, including tables, fields, and constraints like NOT NULL, UNIQUE, and CHECK. Include primary and foreign keys to establish relationships between tables.
+
+
+
+
+				CREATE TABLE members (
+				    member_id NUMBER(10) PRIMARY KEY,
+				    name VARCHAR2(30) NOT NULL,
+				    contact VARCHAR2(11) NOT NULL UNIQUE,
+				    book_id NUMBER(10),  -- Define the book_id column
+				    FOREIGN KEY (book_id) REFERENCES books(book_id)
+				);
+
+
+				CREATE TABLE books (
+				    book_id NUMBER(10) PRIMARY KEY,
+				    title VARCHAR2(30) NOT NULL,
+				    isbn VARCHAR2(10) UNIQUE NOT NULL,
+				    publication_year NUMBER(10) CHECK (publication_year > 1450),
+				    author_id NUMBER(10) NOT NULL
+				);
+
+				ALTER TABLE books ADD (genre VARCHAR2(20));
+
+
+
+
