@@ -1,0 +1,47 @@
+//union & intersection
+
+create table bangaloreoffice
+(
+
+id number(10),
+name varchar2(30),
+age number(10)
+);
+
+create table chennaioffice
+(
+
+id number(10),
+name varchar2(30),
+age number(10)
+);
+
+
+insert into bangaloreoffice values(1 , 'ravi' , 25);
+insert into bangaloreoffice values(2 , 'ankit' , 35);
+insert into bangaloreoffice  values(3 , 'manas' , 26);
+
+insert into chennaioffice values(4 , 'raaavi' , 25);
+insert into chennaioffice values(5 , 'ansskit' , 35);
+insert into chennaioffice values(6 , 'manddas' , 26);
+
+select * from bangaloreoffice
+
+select * from chennaioffice
+
+select * from bangaloreoffice
+union all
+select * from chennaioffice
+
+
+select * from bangaloreoffice
+union 
+select * from chennaioffice
+
+select * from bangaloreoffice
+intersect
+select * from chennaioffice
+
+select * from bangaloreoffice
+minus
+select * from chennaioffice

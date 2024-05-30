@@ -1,0 +1,52 @@
+//Auto increment
+CREATE SEQUENCE empid
+START WITH 1
+INCREMENT BY 1
+MINVALUE 1;
+
+create table employee11
+(
+id number(10) primary key,
+name varchar2(30),
+age number(10),
+dept varchar2(30)
+);
+
+insert into employee11 values(empid.nextval , 'sachin' , 30 , 'hr');
+insert into employee11 values(empid.nextval , 'ravi' , 33 , 'developer');
+insert into employee11 values(empid.nextval , 'faiez' , 30 , 'tester');
+
+select * from employee11
+
+
+
+
+CREATE SEQUENCE product_id
+START WITH 1
+
+
+
+
+
+
+
+select * from employee;
+
+
+
+INCREMENT BY 1
+
+create table product
+(
+id number(10) primary key,
+product_name varchar2(30),
+price number(10),
+category varchar2(30)
+);
+
+
+insert into product values(product_id.nextval , 'mobile' , 50000 , 'electronic');
+insert into product values(product_id.nextval , 'computer' , 33000 , 'hardware');
+insert into employee11 values(empid.nextval , 'faiez' , 30 , 'tester');
+
+select * from employee11
