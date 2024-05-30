@@ -1,0 +1,99 @@
+
+CREATE TABLE Departments (
+  Code INTEGER PRIMARY KEY,
+  Name varchar(255) NOT NULL ,
+  Budget decimal NOT NULL 
+);
+
+desc Departments
+CREATE TABLE Employees (
+  SSN INTEGER PRIMARY KEY,
+  Name varchar(255) NOT NULL ,
+  LastName varchar(255) NOT NULL ,
+  Department INTEGER NOT NULL , 
+  foreign key (department) references Departments(Code) 
+);
+
+desc Employees
+
+INSERT INTO Departments(Code,Name,Budget) VALUES(14,'IT',65000);
+
+INSERT INTO Departments(Code,Name,Budget) VALUES(37,'Accounting',15000);
+INSERT INTO Departments(Code,Name,Budget) VALUES(59,'Human Resources',240000);
+INSERT INTO Departments(Code,Name,Budget) VALUES(77,'Research',55000);
+SELECT * from Departments;
+
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('123234877','Michael','Rogers',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('152934485','Anand','Manikutty',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('222364883','Carol','Smith',37);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('326587417','Joe','Stevens',37);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('332154719','Mary-Anne','Foster',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('332569843','George','ODonnell',77);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('546523478','John','Doe',59);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('631231482','David','Smith',77);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('654873219','Zacary','Efron',59);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('745685214','Eric','Goldsmith',59);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('845657245','Elizabeth','Doe',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('845657246','Kumar','Swamy',14);
+
+SELECT * from Employees;
+SELECT LASTNAME FROM Employees;
+SELECT DISTINCT LASTNAME FROM Employees;
+SELECT * from Employees where LASTNAME='Smith';
+SELECT * from Employees where LASTNAME='Smith' OR LASTNAME='Doe';
+SELECT * from Employees where DEPARTMENT=14;
+SELECT * from Employees where LASTNAME LIKE 'S%';
+SELECT * from Employees where LASTNAME LIKE '%s';
+
+SELECT SUM(BUDGET) from Departments ;
+SELECT Department , COUNT(*) AS number_of_employees from Employees GROUP BY Department ;
+
+SELECT d.* , e.* 
+FROM Employees e
+JOIN Departments d on e.Department=d.Code;
+
+SELECT e.Name , e.Lastname , d.Budget 
+FROM Employees e
+JOIN Departments d on e.Department=d.Code
+WHERE d.Budget>60000;
+
+SELECT Budget from Departments WHERE Budget>(SELECT avg(Budget) from Departments );
+
+---- 2.14 Select the names of departments with more than two employees.
+
+
+
+----Select the name and last name of employees working for departments with second lowest budget.
+--select name , lastname , budget from 
+--(
+--select name , lastname, budget,
+--rank() over(order by budget asc) as rl
+--from Departments 
+--)temp WHERE rl=2;
+
+--SELECT d.Name
+--FROM Employees e
+--JOIN Departments d ON e.Department = d.Code
+--GROUP BY d.Code , d.Name
+--HAVING COUNT(e.SSN) > 2;
+ 
+
+
+
+select dept_name ,first_name,last_name,budget from
+(select dept_name ,first_name,last_name,budget,
+  dense_rank() over(ORDER BY budget) as rl
+  from ( SELECT d.Name as dept_name , e.name as first_name , e.lastname as last_name , d.budget
+         FROM Employees e
+          JOIN Departments d ON e.Department = d.Code)a
+) temp WHERE rl=2 ;
+
+
+-- 2.16  Add a new department called "Quality Assurance", with a budget of $40,000 and departmental code 11. ALTER
+INSERT INTO Departments(Code,Name,Budget) VALUES(11,'Quality Assurence',40000);
+
+-- And Add an employee called "Mary Moore" in that department, with SSN 847-21-9811.
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('847219811','Mary','Moore',11);
+
+-- 2.17 Reduce the budget of all departments by 10%.
+UPDATE Departments SET Budget=Budget*.9;
